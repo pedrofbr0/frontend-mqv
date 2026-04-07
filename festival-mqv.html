@@ -14,8 +14,15 @@
 <link rel="canonical" href="https://festivalmaisqueviaduto.com.br">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&family=Bebas+Neue&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
+@font-face{
+font-family:'Soulcraft';
+src:url('fonts/soulcraftgx.woff2') format('woff2');
+font-weight:normal;
+font-style:normal;
+font-display:swap;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
 --black:#000;--white:#fff;--creme:#F3DCB3;--azul:#24A1A6;--fogo:#E84633;
@@ -43,7 +50,7 @@ transition:transform .3s;
 }
 nav.hidden{transform:translateY(-100%)}
 .nav-logo{
-font-family:'Dela Gothic One',sans-serif;color:var(--creme);font-size:1.4rem;
+font-family:'Soulcraft',sans-serif;color:var(--creme);font-size:1.4rem;
 letter-spacing:-1px;text-decoration:none;
 }
 .nav-logo span{color:var(--fogo)}
@@ -75,11 +82,8 @@ padding:80px 24px 60px;
 }
 .hero-bg{
 position:absolute;inset:0;
-background:
-  linear-gradient(135deg,var(--fogo) 0%,var(--fogo) 25%,transparent 25%),
-  linear-gradient(225deg,var(--azul) 0%,var(--azul) 20%,transparent 20%),
-  linear-gradient(315deg,var(--amarelo) 0%,var(--amarelo) 15%,transparent 15%);
-opacity:.15;
+background:url('images/hero-bg.jpeg') center/cover no-repeat;
+filter:brightness(.45);
 }
 .hero-shapes{position:absolute;inset:0;overflow:hidden}
 .hero-shapes .shape{position:absolute;border-radius:50%}
@@ -95,7 +99,7 @@ padding:8px 20px;text-transform:uppercase;letter-spacing:3px;
 margin-bottom:32px;transform:rotate(-2deg);
 }
 .hero-title{
-font-family:'Dela Gothic One',sans-serif;
+font-family:'Soulcraft',sans-serif;
 font-size:clamp(3rem,10vw,8rem);line-height:.9;
 color:var(--creme);margin-bottom:16px;
 }
@@ -140,7 +144,7 @@ white-space:nowrap;
 display:inline-flex;animation:ticker 20s linear infinite;
 }
 .ticker-text{
-font-family:'Dela Gothic One',sans-serif;font-size:1.4rem;
+font-family:'Soulcraft',sans-serif;font-size:1.4rem;
 color:var(--creme);padding:0 48px;text-transform:uppercase;
 }
 .ticker-text .dot{color:var(--amarelo);margin:0 16px}
@@ -149,7 +153,7 @@ color:var(--creme);padding:0 48px;text-transform:uppercase;
 /* SECTIONS */
 section{padding:80px 24px}
 .section-title{
-font-family:'Dela Gothic One',sans-serif;
+font-family:'Soulcraft',sans-serif;
 font-size:clamp(2rem,5vw,3.5rem);
 text-transform:uppercase;margin-bottom:16px;
 line-height:1;
@@ -173,11 +177,11 @@ transform:rotate(2deg);position:relative;
 content:'';position:absolute;inset:-8px;border:4px solid var(--fogo);
 transform:rotate(-1deg);
 }
-.sobre-card h3{font-family:'Dela Gothic One',sans-serif;font-size:2rem;margin-bottom:16px;color:var(--amarelo)}
+.sobre-card h3{font-family:'Soulcraft',sans-serif;font-size:2rem;margin-bottom:16px;color:var(--amarelo)}
 .sobre-card p{font-size:.95rem;line-height:1.6;opacity:.8}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
 .stat{text-align:center}
-.stat-num{font-family:'Dela Gothic One',sans-serif;font-size:2.5rem;color:var(--fogo)}
+.stat-num{font-family:'Soulcraft',sans-serif;font-size:2.5rem;color:var(--fogo)}
 .stat-label{font-size:.8rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;opacity:.6}
 
 /* LINEUP */
@@ -204,7 +208,7 @@ font-family:'Bebas Neue',sans-serif;font-size:1.2rem;
 color:var(--amarelo);letter-spacing:2px;
 }
 .lineup-slot .act{
-font-family:'Dela Gothic One',sans-serif;font-size:1.6rem;
+font-family:'Soulcraft',sans-serif;font-size:1.6rem;
 margin:8px 0;color:var(--creme);
 }
 .lineup-slot .genre{
@@ -233,7 +237,7 @@ transition:transform .3s;
 }
 .exp-card:hover{transform:translateX(8px)}
 .exp-card h3{
-font-family:'Dela Gothic One',sans-serif;font-size:1.3rem;
+font-family:'Soulcraft',sans-serif;font-size:1.3rem;
 margin-bottom:12px;color:var(--amarelo);
 }
 .exp-card p{font-size:.95rem;line-height:1.6;opacity:.85}
@@ -253,7 +257,7 @@ width:16px;height:16px;border-radius:50%;
 background:var(--fogo);border:3px solid var(--black);
 }
 .timeline-item h3{
-font-family:'Dela Gothic One',sans-serif;font-size:1.4rem;
+font-family:'Soulcraft',sans-serif;font-size:1.4rem;
 margin-bottom:4px;
 }
 .timeline-item .date{
@@ -271,7 +275,7 @@ padding:4px 12px;font-weight:700;font-size:.8rem;margin-top:8px;
 .local{background:var(--black);color:var(--creme)}
 .local .section-label{background:var(--azul)}
 .local-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.local-info h3{font-family:'Dela Gothic One',sans-serif;font-size:1.8rem;margin-bottom:16px;color:var(--amarelo)}
+.local-info h3{font-family:'Soulcraft',sans-serif;font-size:1.8rem;margin-bottom:16px;color:var(--amarelo)}
 .local-info p{font-size:1rem;line-height:1.8;opacity:.8;margin-bottom:16px}
 .local-info .address{
 background:rgba(243,220,179,.1);padding:20px;
@@ -311,7 +315,7 @@ background:var(--black);color:var(--creme);
 padding:40px 24px;text-align:center;
 }
 footer .footer-logo{
-font-family:'Dela Gothic One',sans-serif;font-size:2rem;
+font-family:'Soulcraft',sans-serif;font-size:2rem;
 margin-bottom:16px;
 }
 footer .footer-logo span{color:var(--fogo)}
