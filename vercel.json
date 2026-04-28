@@ -1,5 +1,14 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/festival-mqv.html" }
+  "redirects": [
+    {
+      "source": "/festival-mqv.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/visualizar-pdf.html",
+      "destination": "/#pmic",
+      "permanent": true
+    }
   ]
 }
