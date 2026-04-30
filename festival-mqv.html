@@ -335,22 +335,37 @@
 
 <!-- GALERIA -->
 <section class="galeria" id="galeria">
-  <div class="galeria-inner">
-    <span class="section-label">Registros</span>
-    <h2 class="section-title">Galeria</h2>
-    <div class="galeria-grid">
-      <div class="galeria-item has-img reveal">
-        <img src="images/hero-bg.jpeg" alt="Centro Municipal de Cultura com identidade visual do Festival +QV" loading="lazy">
+    <div class="galeria-inner">
+      <span class="section-label">Registros</span>
+      <h2 class="section-title">Galeria</h2>
+      <div class="galeria-carousel">
+        <div class="galeria-arrow galeria-arrow-left-outer">
+          <button class="galeria-arrow galeria-arrow-left" aria-label="Imagem anterior">&#8592;</button>
+        </div>
+        <div class="galeria-focus-area">
+          <!-- Imagem em foco -->
+          <div class="galeria-focus" tabindex="0">
+            <img src="images/hero-bg.jpeg" alt="Centro Municipal de Cultura com identidade visual do Festival +QV" loading="lazy">
+          </div>
+          <!-- Pré-visualizações em grade 3x3 -->
+          <div class="galeria-previews-grid">
+            <div class="galeria-preview"><img src="images/galeria/image00001.jpeg" alt="Foto do festival +QV 1" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00002.jpeg" alt="Foto do festival +QV 2" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00006.jpeg" alt="Foto do festival +QV 3" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00010.jpeg" alt="Foto do festival +QV 4" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00011.jpeg" alt="Foto do festival +QV 5" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00016.jpeg" alt="Foto do festival +QV 6" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00021.jpeg" alt="Foto do festival +QV 7" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00024.jpeg" alt="Foto do festival +QV 8" loading="lazy"></div>
+            <div class="galeria-preview"><img src="images/galeria/image00028.jpeg" alt="Foto do festival +QV 9" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="galeria-arrow galeria-arrow-right-outer">
+          <button class="galeria-arrow galeria-arrow-right" aria-label="Próxima imagem">&#8594;</button>
+        </div>
       </div>
-      <div class="galeria-item reveal">Em breve</div>
-      <div class="galeria-item reveal">Em breve</div>
-      <div class="galeria-item reveal">Em breve</div>
-      <div class="galeria-item reveal">Em breve</div>
-      <div class="galeria-item reveal">Em breve</div>
-      <div class="galeria-item reveal">Em breve</div>
+      <p class="galeria-note">📸 Mais fotos e vídeos das edições anteriores em breve</p>
     </div>
-    <p class="galeria-note reveal">📸 Mais fotos e vídeos das edições anteriores em breve</p>
-  </div>
 </section>
 
 <!-- LOCAL -->
@@ -594,6 +609,158 @@ document.querySelectorAll('.faq-question').forEach(button=>{
     }
   });
 });
+
+// GALERIA CAROUSEL & MODAL (GRADE 3x3)
+(function(){
+  const galeriaCarousel = document.querySelector('.galeria-carousel');
+  if (!galeriaCarousel) return;
+  const focusArea = galeriaCarousel.querySelector('.galeria-focus-area');
+  const focusDiv = focusArea.querySelector('.galeria-focus');
+  const previewsGrid = focusArea.querySelector('.galeria-previews-grid');
+  const previews = Array.from(previewsGrid.querySelectorAll('.galeria-preview'));
+  const arrowLeft = galeriaCarousel.querySelector('.galeria-arrow-left');
+  const arrowRight = galeriaCarousel.querySelector('.galeria-arrow-right');
+  // Todas as imagens da galeria
+  const galeriaImgs = [
+    {src:'images/hero-bg.jpeg',alt:'Centro Municipal de Cultura com identidade visual do Festival +QV'},
+    {src:'images/galeria/image00001.jpeg',alt:'Foto do festival +QV 1'},
+    {src:'images/galeria/image00002.jpeg',alt:'Foto do festival +QV 2'},
+    {src:'images/galeria/image00006.jpeg',alt:'Foto do festival +QV 3'},
+    {src:'images/galeria/image00010.jpeg',alt:'Foto do festival +QV 4'},
+    {src:'images/galeria/image00011.jpeg',alt:'Foto do festival +QV 5'},
+    {src:'images/galeria/image00016.jpeg',alt:'Foto do festival +QV 6'},
+    {src:'images/galeria/image00021.jpeg',alt:'Foto do festival +QV 7'},
+    {src:'images/galeria/image00024.jpeg',alt:'Foto do festival +QV 8'},
+    {src:'images/galeria/image00028.jpeg',alt:'Foto do festival +QV 9'}
+  ];
+  let current = 0;
+  // Atualiza o carrossel
+  function renderCarousel(idx) {
+    current = (idx + galeriaImgs.length) % galeriaImgs.length;
+    // Focus
+    focusDiv.querySelector('img').src = galeriaImgs[current].src;
+    focusDiv.querySelector('img').alt = galeriaImgs[current].alt;
+    // Previews: mostrar próximos 9 (ou menos)
+    for (let i = 0; i < previews.length; i++) {
+      const imgIdx = (current + i + 1) % galeriaImgs.length;
+      previews[i].querySelector('img').src = galeriaImgs[imgIdx].src;
+      previews[i].querySelector('img').alt = galeriaImgs[imgIdx].alt;
+    }
+  }
+  // Navegação
+  arrowLeft.addEventListener('click',()=>renderCarousel(current-1));
+  arrowRight.addEventListener('click',()=>renderCarousel(current+1));
+  // Clique em preview
+  previews.forEach((preview,i)=>{
+    preview.addEventListener('click',()=>{
+      renderCarousel(current+i+1);
+    });
+    preview.setAttribute('tabindex','0');
+    preview.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){
+        renderCarousel(current+i+1);
+      }
+    });
+  });
+  // Teclado no focus
+  focusDiv.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft') renderCarousel(current-1);
+    if(e.key==='ArrowRight') renderCarousel(current+1);
+    if(e.key==='Enter'||e.key===' '){
+      openModal();
+    }
+  });
+  // Modal
+  let modal=null;
+  function openModal(){
+    if(modal) return;
+    modal = document.createElement('div');
+    modal.className = 'galeria-modal';
+    modal.innerHTML = `
+      <div class="galeria-modal-bg" tabindex="-1"></div>
+      <div class="galeria-modal-content" role="dialog" aria-modal="true">
+        <button class="galeria-modal-close" aria-label="Fechar">&times;</button>
+        <button class="galeria-modal-arrow galeria-modal-arrow-left" aria-label="Imagem anterior">&#8592;</button>
+        <img src="${galeriaImgs[current].src}" alt="${galeriaImgs[current].alt}" class="galeria-modal-img" loading="lazy">
+        <button class="galeria-modal-arrow galeria-modal-arrow-right" aria-label="Próxima imagem">&#8594;</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    // Fechar
+    modal.querySelector('.galeria-modal-close').onclick = closeModal;
+    modal.querySelector('.galeria-modal-bg').onclick = closeModal;
+    // Navegação
+    modal.querySelector('.galeria-modal-arrow-left').onclick = ()=>modalNav(-1);
+    modal.querySelector('.galeria-modal-arrow-right').onclick = ()=>modalNav(1);
+    // Teclado
+    modal.addEventListener('keydown',modalKeyHandler);
+    // Foco inicial
+    setTimeout(()=>{
+      modal.querySelector('.galeria-modal-content').focus();
+    },10);
+    // Swipe
+    let startX=null;
+    modal.querySelector('.galeria-modal-content').addEventListener('touchstart',e=>{
+      if(e.touches.length===1) startX=e.touches[0].clientX;
+    });
+    modal.querySelector('.galeria-modal-content').addEventListener('touchend',e=>{
+      if(startX!==null && e.changedTouches.length===1){
+        const dx = e.changedTouches[0].clientX - startX;
+        if(Math.abs(dx)>40){
+          modalNav(dx<0?1:-1);
+        }
+      }
+      startX=null;
+    });
+  }
+  function closeModal(){
+    if(modal){
+      modal.remove();
+      modal=null;
+    }
+  }
+  function modalNav(dir){
+    current = (current+dir+galeriaImgs.length)%galeriaImgs.length;
+    const img = modal.querySelector('.galeria-modal-img');
+    img.src = galeriaImgs[current].src;
+    img.alt = galeriaImgs[current].alt;
+  }
+  function modalKeyHandler(e){
+    if(e.key==='Escape') closeModal();
+    if(e.key==='ArrowLeft') modalNav(-1);
+    if(e.key==='ArrowRight') modalNav(1);
+    if(e.key==='Tab'){
+      // Foco cíclico
+      const focusables = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+      const first = focusables[0], last = focusables[focusables.length-1];
+      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    }
+  }
+  // Clique para abrir modal
+  focusDiv.addEventListener('click', function(e) {
+    if (e.target.tagName === 'IMG' || e.currentTarget === e.target) {
+      openModal();
+    }
+  });
+  focusDiv.setAttribute('tabindex','0');
+  // Swipe no carrossel
+  let startX=null;
+  focusArea.addEventListener('touchstart',e=>{
+    if(e.touches.length===1) startX=e.touches[0].clientX;
+  });
+  focusArea.addEventListener('touchend',e=>{
+    if(startX!==null && e.changedTouches.length===1){
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx)>40){
+        renderCarousel(current+(dx<0?1:-1));
+      }
+    }
+    startX=null;
+  });
+  // Inicial
+  renderCarousel(0);
+})();
 </script>
 
 <!-- JSON-LD Structured Data -->
