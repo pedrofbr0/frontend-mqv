@@ -680,9 +680,11 @@ document.querySelectorAll('.faq-question').forEach(button=>{
       <div class="galeria-modal-bg" tabindex="-1"></div>
       <div class="galeria-modal-content" role="dialog" aria-modal="true">
         <button class="galeria-modal-close" aria-label="Fechar">&times;</button>
-        <button class="galeria-modal-arrow galeria-modal-arrow-left" aria-label="Imagem anterior">&#8592;</button>
+        <div class="galeria-modal-arrows-row">
+          <button class="galeria-modal-arrow galeria-modal-arrow-left" aria-label="Imagem anterior">&#8592;</button>
+          <button class="galeria-modal-arrow galeria-modal-arrow-right" aria-label="Próxima imagem">&#8594;</button>
+        </div>
         <img src="${galeriaImgs[current].src}" alt="${galeriaImgs[current].alt}" class="galeria-modal-img" loading="lazy">
-        <button class="galeria-modal-arrow galeria-modal-arrow-right" aria-label="Próxima imagem">&#8594;</button>
       </div>
     `;
     document.body.appendChild(modal);
@@ -694,6 +696,15 @@ document.querySelectorAll('.faq-question').forEach(button=>{
     modal.querySelector('.galeria-modal-arrow-right').onclick = ()=>modalNav(1);
     // Teclado
     modal.addEventListener('keydown',modalKeyHandler);
+    // Foco nas setas permite navegação por teclado
+    modal.querySelector('.galeria-modal-arrow-left').addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') { modalNav(-1); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { modalNav(1); e.preventDefault(); }
+    });
+    modal.querySelector('.galeria-modal-arrow-right').addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') { modalNav(-1); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { modalNav(1); e.preventDefault(); }
+    });
     // Foco inicial
     setTimeout(()=>{
       modal.querySelector('.galeria-modal-content').focus();
@@ -736,8 +747,8 @@ document.querySelectorAll('.faq-question').forEach(button=>{
   }
   function modalKeyHandler(e){
     if(e.key==='Escape') closeModal();
-    if(e.key==='ArrowLeft') modalNav(-1);
-    if(e.key==='ArrowRight') modalNav(1);
+    if(e.key==='ArrowLeft') { modalNav(-1); e.preventDefault(); }
+    if(e.key==='ArrowRight') { modalNav(1); e.preventDefault(); }
     if(e.key==='Tab'){
       // Foco cíclico
       const focusables = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');

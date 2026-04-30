@@ -65,6 +65,20 @@
 .galeria-modal-close:hover {
   color: #e36b5c;
 }
+/* Setas do modal simétricas e afastadas da imagem */
+.galeria-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.galeria-modal-arrows-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
 .galeria-modal-arrow {
   background: none;
   border: 2px solid var(--creme, #f5e3c3);
@@ -73,18 +87,31 @@
   width: 44px;
   height: 44px;
   font-size: 2rem;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin: 0 12px;
-  position: relative;
-  top: 0;
-  transition: background 0.2s, color 0.2s;
+  margin: 0 32px;
+  outline: none;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.galeria-modal-arrow:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--creme, #f5e3c3);
 }
 .galeria-modal-arrow:hover {
   background: var(--creme, #f5e3c3);
   color: #111;
+}
+@media (max-width: 700px) {
+  .galeria-modal-arrows-row {
+    margin-bottom: 8px;
+  }
+  .galeria-modal-arrow {
+    margin: 0 8px;
+  }
 }
 @media (max-width: 700px) {
   .galeria-modal-content {
