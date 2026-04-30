@@ -1,3 +1,101 @@
+/* --- GALERIA MODAL E ANIMAÇÃO --- */
+.galeria-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.85);
+  animation: galeriaModalFadeIn 0.3s;
+}
+@keyframes galeriaModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.galeria-modal-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: transparent;
+}
+.galeria-modal-content {
+  position: relative;
+  background: #181818;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #000b;
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  outline: none;
+}
+.galeria-modal-img {
+  max-width: 80vw;
+  max-height: 70vh;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #000a;
+  background: #222;
+  margin-bottom: 16px;
+  transition: opacity 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1);
+  opacity: 1;
+  transform: scale(1);
+}
+.galeria-modal-img.galeria-img-out {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+.galeria-modal-img.galeria-img-in {
+  opacity: 1;
+  transform: scale(1.04);
+}
+.galeria-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: var(--creme, #f5e3c3);
+  font-size: 2.2rem;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.2s;
+}
+.galeria-modal-close:hover {
+  color: #e36b5c;
+}
+.galeria-modal-arrow {
+  background: none;
+  border: 2px solid var(--creme, #f5e3c3);
+  color: var(--creme, #f5e3c3);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 12px;
+  position: relative;
+  top: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.galeria-modal-arrow:hover {
+  background: var(--creme, #f5e3c3);
+  color: #111;
+}
+@media (max-width: 700px) {
+  .galeria-modal-content {
+    padding: 12px 4px 8px 4px;
+    min-width: 0;
+  }
+  .galeria-modal-img {
+    max-width: 98vw;
+    max-height: 50vh;
+  }
+}
 /* --- GALERIA CAROUSEL GRADE 3x3 --- */
 .galeria-carousel {
   display: flex;

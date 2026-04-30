@@ -720,10 +720,19 @@ document.querySelectorAll('.faq-question').forEach(button=>{
     }
   }
   function modalNav(dir){
-    current = (current+dir+galeriaImgs.length)%galeriaImgs.length;
     const img = modal.querySelector('.galeria-modal-img');
-    img.src = galeriaImgs[current].src;
-    img.alt = galeriaImgs[current].alt;
+    img.classList.remove('galeria-img-in');
+    img.classList.add('galeria-img-out');
+    setTimeout(() => {
+      current = (current+dir+galeriaImgs.length)%galeriaImgs.length;
+      img.src = galeriaImgs[current].src;
+      img.alt = galeriaImgs[current].alt;
+      img.classList.remove('galeria-img-out');
+      img.classList.add('galeria-img-in');
+      setTimeout(()=>{
+        img.classList.remove('galeria-img-in');
+      }, 400);
+    }, 200);
   }
   function modalKeyHandler(e){
     if(e.key==='Escape') closeModal();
@@ -738,10 +747,8 @@ document.querySelectorAll('.faq-question').forEach(button=>{
     }
   }
   // Clique para abrir modal
-  focusDiv.addEventListener('click', function(e) {
-    if (e.target.tagName === 'IMG' || e.currentTarget === e.target) {
-      openModal();
-    }
+  focusDiv.addEventListener('click', function() {
+    openModal();
   });
   focusDiv.setAttribute('tabindex','0');
   // Swipe no carrossel
