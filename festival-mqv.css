@@ -695,6 +695,15 @@ transition:background .3s,color .3s,transform .3s;
 .galeria .section-label{background:var(--azul)}
 .galeria .section-title{color:var(--creme)}
 .galeria-inner{max-width:1000px;margin:0 auto}
+.galeria-help{
+text-align:center;
+margin-top:10px;
+margin-bottom:22px;
+color:var(--amarelo);
+font-size:.95rem;
+letter-spacing:.2px;
+opacity:.9;
+}
 .galeria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:40px}
 .galeria-item{
 aspect-ratio:4/3;background:rgba(243,220,179,.06);border:1px solid rgba(243,220,179,.1);
