@@ -934,7 +934,7 @@ body.modal-open {
 
 .galeria-modal-content {
   z-index: 30001;
-  width: min(92vw, 720px);
+  width: min(96vw, 1080px);
   min-width: 0;
 }
 
@@ -1128,5 +1128,41 @@ body.modal-open {
     height: 40px;
     margin: 0 2px;
     font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .galeria-modal-img {
+    max-height: 88vh;
+  }
+
+  .galeria-previews-grid {
+    width: 420px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 0;
+    align-items: stretch;
+    isolation: isolate;
+  }
+
+  .galeria-preview {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14);
+  }
+
+  .galeria-preview img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .galeria-preview:hover,
+  .galeria-preview:focus {
+    z-index: 3;
   }
 }
