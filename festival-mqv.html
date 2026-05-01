@@ -683,16 +683,17 @@ document.querySelectorAll('.faq-question').forEach(button=>{
     modal.className = 'galeria-modal';
     modal.innerHTML = `
       <div class="galeria-modal-bg" tabindex="-1"></div>
-      <div class="galeria-modal-content" role="dialog" aria-modal="true">
+      <div class="galeria-modal-content" role="dialog" aria-modal="true" tabindex="-1">
         <button class="galeria-modal-close" aria-label="Fechar">&times;</button>
+        <img src="${galeriaImgs[current].src}" alt="${galeriaImgs[current].alt}" class="galeria-modal-img" loading="lazy">
         <div class="galeria-modal-arrows-row">
           <button class="galeria-modal-arrow galeria-modal-arrow-left" aria-label="Imagem anterior">&#8592;</button>
           <button class="galeria-modal-arrow galeria-modal-arrow-right" aria-label="Próxima imagem">&#8594;</button>
         </div>
-        <img src="${galeriaImgs[current].src}" alt="${galeriaImgs[current].alt}" class="galeria-modal-img" loading="lazy">
       </div>
     `;
     document.body.appendChild(modal);
+    document.body.classList.add('modal-open');
     // Fechar
     modal.querySelector('.galeria-modal-close').onclick = closeModal;
     modal.querySelector('.galeria-modal-bg').onclick = closeModal;
@@ -734,6 +735,7 @@ document.querySelectorAll('.faq-question').forEach(button=>{
       modal.remove();
       modal=null;
     }
+    document.body.classList.remove('modal-open');
   }
   function modalNav(dir){
     const img = modal.querySelector('.galeria-modal-img');
